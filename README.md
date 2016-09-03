@@ -7,7 +7,7 @@ This repo is a fork of [ngineered/nginx-nodejs](https://github.com/ngineered/ngi
 - Install Node v6.5.0
 - Default webroot is now /www
 
-All credit goes to [Ric Harvey](https://github.com/ngineered),
+All credit goes to [Ric Harvey](https://github.com/ngineered)
 
 ### Git repository
 The source files for this project can be found here: [https://github.com/yjimk/nginx-nodejs](https://github.com/yjimk/nginx-nodejs)
