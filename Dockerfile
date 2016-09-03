@@ -9,7 +9,7 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     nginx \
     supervisor \
     curl \
-    nodejs-6.5.0-r0 \
+    nodejs=6.2.0-r0 \
     bc \
     gcc \
     musl-dev \
