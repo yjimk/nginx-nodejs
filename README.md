@@ -1,16 +1,26 @@
 ## Introduction
 This is a Dockerfile to build a container image for nginx and nodeJS, with the ability to push and pull website code to and from git. There is also support for lets encrypt SSL support.
 
+This repo is a fork of [ngineered/nginx-nodejs](https://github.com/ngineered/nginx-nodejs), simply due to some issues I was facing with node v4 and npm install on ubuntu 16.04.
+
+####Changes
+- Install Node v6.5.0
+- Default webroot is now /www
+
+All credit goes to [Ric Harvey](https://github.com/ngineered),
+
 ### Git repository
-The source files for this project can be found here: [https://github.com/ngineered/nginx-nodejs](https://github.com/ngineered/nginx-nodejs)
+The source files for this project can be found here: [https://github.com/yjimk/nginx-nodejs](https://github.com/yjimk/nginx-nodejs)
 
 If you have any improvements please submit a pull request.
+
 ### Docker hub repository
 The Docker hub build can be found here: [https://registry.hub.docker.com/u/richarvey/nginx-nodejs/](https://registry.hub.docker.com/u/richarvey/nginx-nodejs/)
+
 ## Versions
 | Tag | Nginx | nodeJS | Alpine |
 |-----|-------|-----|--------|
-| latest | 1.10.1 | 4.4.4 | 3.4 |
+| latest | 1.10.1 | 6.5.0 | 3.4 |
 
 ## Building from source
 To build from source you need to clone the git repo and run docker build:
@@ -32,10 +42,13 @@ sudo docker run -d richarvey/nginx-nodejs
 ```
 
 You can then browse to ```http://<DOCKER_HOST>:8080``` to view the default install files. To find your ```DOCKER_HOST``` use the ```docker inspect``` to get the IP address.
+
 ### Installing NPM Components
 To install component for you node application to run simply include a ```packages.json``` file in the root of your application. The container will then install the components on start.
+
 ### Starting your application
 At the moment the container looks for ```server.js``` in your web root and executes that. Nginx is expecting your application to listen on port ```3000```. In future versions you'll be able to configure this.
+
 ### Available Configuration Parameters
 The following flags are a list of all the currently supported options that can be changed by passing in the variables to docker with the -e flag.
 
