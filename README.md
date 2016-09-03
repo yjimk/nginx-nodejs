@@ -15,7 +15,7 @@ The source files for this project can be found here: [https://github.com/yjimk/n
 If you have any improvements please submit a pull request.
 
 ### Docker hub repository
-The Docker hub build can be found here: [https://registry.hub.docker.com/u/richarvey/nginx-nodejs/](https://registry.hub.docker.com/u/richarvey/nginx-nodejs/)
+The Docker hub build can be found here: [https://registry.hub.docker.com/r/yjimk/nginx-nodejs/](https://hub.docker.com/r/yjimk/nginx-nodejs/)
 
 ## Versions
 | Tag | Nginx | nodeJS | Alpine |
@@ -25,20 +25,20 @@ The Docker hub build can be found here: [https://registry.hub.docker.com/u/richa
 ## Building from source
 To build from source you need to clone the git repo and run docker build:
 ```
-git clone https://github.com/ngineered/nginx-nodejs
+git clone https://github.com/yjimk/nginx-nodejs
 .git
 docker build -t nginx-nodejs:latest .
 ```
 
 ## Pulling from Docker Hub
 ```
-docker pull richarvey/nginx-nodejs
+docker pull yjimk/nginx-nodejs
 ```
 
 ## Running
 To simply run the container:
 ```
-sudo docker run -d richarvey/nginx-nodejs
+sudo docker run -d yjimk/nginx-nodejs
 ```
 
 You can then browse to ```http://<DOCKER_HOST>:8080``` to view the default install files. To find your ```DOCKER_HOST``` use the ```docker inspect``` to get the IP address.
@@ -79,12 +79,12 @@ You can pass the container your personal access token from your git account usin
 Since the access token acts as a password with limited access, the git push/pull uses HTTPS to authenticate. You will need to specify your __GIT_USERNAME__ and __GIT_PERSONAL_TOKEN__ variables to push and pull. You'll need to also have the __GIT_EMAIL__, __GIT_NAME__ and __GIT_REPO__ common variables defined.
 
 ```
-docker run -d -e 'GIT_EMAIL=email_address' -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GIT_REPO=github.com/project' -e 'GIT_PERSONAL_TOKEN=<long_token_string_here>' richarvey/nginx-nodejs:latest
+docker run -d -e 'GIT_EMAIL=email_address' -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GIT_REPO=github.com/project' -e 'GIT_PERSONAL_TOKEN=<long_token_string_here>' yjimk/nginx-nodejs:latest
 ```
 
 To pull a repository and specify a branch add the __GIT_BRANCH__ environment variable:
 ```
-docker run -d -e 'GIT_EMAIL=email_address' -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GIT_REPO=github.com/project' -e 'GIT_PERSONAL_TOKEN=<long_token_string_here>' -e 'GIT_BRANCH=stage' richarvey/nginx-nodejs:latest
+docker run -d -e 'GIT_EMAIL=email_address' -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GIT_REPO=github.com/project' -e 'GIT_PERSONAL_TOKEN=<long_token_string_here>' -e 'GIT_BRANCH=stage' yjimk/nginx-nodejs:latest
 ```
 #### SSH keys
 
@@ -99,12 +99,12 @@ base64 -w 0 /path_to_your_key
 
 To run the container and pull code simply specify the GIT_REPO URL including *git@* and then make sure you have also supplied your base64 version of your ssh deploy key:
 ```
-sudo docker run -d -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GIT_REPO=github.com/project' -e 'SSH_KEY=BIG_LONG_BASE64_STRING_GOES_IN_HERE' richarvey/nginx-nodejs:latest
+sudo docker run -d -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GIT_REPO=github.com/project' -e 'SSH_KEY=BIG_LONG_BASE64_STRING_GOES_IN_HERE' yjimk/nginx-nodejs:latest
 ```
 
 To pull a repository and specify a branch add the GIT_BRANCH environment variable:
 ```
-sudo docker run -d -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GIT_REPO=github.com/project' -e 'SSH_KEY=BIG_LONG_BASE64_STRING_GOES_IN_HERE' -e 'GIT_BRANCH=stage' richarvey/nginx-nodejs:latest
+sudo docker run -d -e 'GIT_NAME=full_name' -e 'GIT_USERNAME=git_username' -e 'GIT_REPO=github.com/project' -e 'SSH_KEY=BIG_LONG_BASE64_STRING_GOES_IN_HERE' -e 'GIT_BRANCH=stage' yjimk/nginx-nodejs:latest
 ```
 
 ### Custom Nginx Config files
@@ -149,7 +149,7 @@ To set the variables pass them in as environment variables on the docker command
 
 Example:
 ```
-sudo docker run -d -e 'YOUR_VAR=VALUE' richarvey/nginx-nodejs
+sudo docker run -d -e 'YOUR_VAR=VALUE' yjimk/nginx-nodejs
 ```
 
 ## Logging and Errors
@@ -160,4 +160,4 @@ All logs should now print out in stdout/stderr and are available via the docker 
 docker logs <CONTAINER_NAME>
 ```
 ### WebRoot
-You can set your webroot in the container to anything you want using the ```WEBROOT``` variable e.g -e "WEBROOT=/var/www/html/public". By default code is checked out into /var/www/html/ so if your git repository does not have code in the root you'll need to use this variable.
+You can set your webroot in the container to anything you want using the ```WEBROOT``` variable e.g -e "WEBROOT=/var/www/html/public". By default code is checked out into /www so if your git repository does not have code in the root you'll need to use this variable.
