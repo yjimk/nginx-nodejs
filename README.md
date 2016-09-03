@@ -4,7 +4,7 @@ This is a Dockerfile to build a container image for nginx and nodeJS, with the a
 This repo is a fork of [ngineered/nginx-nodejs](https://github.com/ngineered/nginx-nodejs), simply due to some issues I was facing with node v4 and npm install on ubuntu 16.04.
 
 ####Changes
-- Install Node v6.5.0
+- Install Node v6.2.0
 - Default webroot is now /www
 
 All credit goes to [Ric Harvey](https://github.com/ngineered)
@@ -20,7 +20,7 @@ The Docker hub build can be found here: [https://registry.hub.docker.com/r/yjimk
 ## Versions
 | Tag | Nginx | nodeJS | Alpine |
 |-----|-------|-----|--------|
-| latest | 1.10.1 | 6.5.0 | 3.4 |
+| latest | 1.10.1 | 6.2.0 | 3.4 |
 
 ## Building from source
 To build from source you need to clone the git repo and run docker build:
