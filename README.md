@@ -7,6 +7,8 @@ Work in progress, not yet tested in production.
 
 ####Changes
 - Install Node v6.2.0
+- Install VIM
+- Move webroot to default to /www
 
 All credit goes to [Ric Harvey](https://github.com/ngineered)
 
