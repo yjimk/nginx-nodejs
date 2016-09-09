@@ -22,6 +22,7 @@ RUN echo http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories 
     libffi-dev \
     ca-certificates \
     dialog \
+    vim \
     git && \
     mkdir -p /etc/nginx && \
     mkdir -p /var/www/app && \
