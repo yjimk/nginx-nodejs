@@ -3,6 +3,8 @@ This is a Dockerfile to build a container image for nginx and nodeJS, with the a
 
 This repo is a fork of [ngineered/nginx-nodejs](https://github.com/ngineered/nginx-nodejs), simply due to some issues I was facing with node v4 and npm install on ubuntu 16.04.
 
+Work in progress, not yet tested in production.
+
 ####Changes
 - Install Node v6.2.0
 - Default webroot is now /www
@@ -25,8 +27,7 @@ The Docker hub build can be found here: [https://registry.hub.docker.com/r/yjimk
 ## Building from source
 To build from source you need to clone the git repo and run docker build:
 ```
-git clone https://github.com/yjimk/nginx-nodejs
-.git
+git clone https://github.com/yjimk/nginx-nodejs.git
 docker build -t nginx-nodejs:latest .
 ```
 
