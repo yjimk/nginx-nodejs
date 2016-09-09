@@ -7,7 +7,6 @@ Work in progress, not yet tested in production.
 
 ####Changes
 - Install Node v6.2.0
-- Default webroot is now /www
 
 All credit goes to [Ric Harvey](https://github.com/ngineered)
 
