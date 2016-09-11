@@ -16,7 +16,7 @@ if [ ! -z "$WEBROOT" ]; then
  sed -i "s#root /var/www/html;#root ${WEBROOT};#g" /etc/nginx/sites-available/default.conf && \
  sed -i "s#/var/www/html#${WEBROOT}#g" /etc/supervisord.conf
 else
- WEBROOT=/var/www/html
+ WEBROOT=/www
 fi
 
 # Setup git variables
@@ -29,35 +29,35 @@ if [ ! -z "$GIT_NAME" ]; then
 fi
 
 # Dont pull code down if the .git folder exists
-if [ ! -d "/var/www/html/.git" ]; then
+if [ ! -d "$WEBROOT.git" ]; then
  # Pull down code from git for our site!
  if [ ! -z "$GIT_REPO" ]; then
    # Remove the test index file
    rm -Rf /var/www/html/*
    if [ ! -z "$GIT_BRANCH" ]; then
      if [ -z "$GIT_USERNAME" ] && [ -z "$GIT_PERSONAL_TOKEN" ]; then
-       git clone -b $GIT_BRANCH $GIT_REPO /var/www/html/
+       git clone -b $GIT_BRANCH $GIT_REPO $WEBROOT
      else
-       git clone -b ${GIT_BRANCH} https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO} /var/www/html
+       git clone -b ${GIT_BRANCH} https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO} $WEBROOT
      fi
    else
      if [ -z "$GIT_USERNAME" ] && [ -z "$GIT_PERSONAL_TOKEN" ]; then
-       git clone $GIT_REPO /var/www/html/
+       git clone $GIT_REPO $WEBROOT
      else
-       git clone https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO} /var/www/html
+       git clone https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO} $WEBROOT
      fi
    fi
-   chown -Rf nginx.nginx /var/www/html
+   chown -Rf nginx.nginx $WEBROOT
  fi
 fi
 
 # Enable custom nginx config files if they exist
-if [ -f /var/www/html/conf/nginx/nginx-site.conf ]; then
-  cp /var/www/html/conf/nginx/nginx-site.conf /etc/nginx/sites-available/default.conf
+if [ -f $WEBROOT/conf/nginx/nginx-site.conf ]; then
+  cp $WEBROOT/conf/nginx/nginx-site.conf /etc/nginx/sites-available/default.conf
 fi
 
-if [ -f /var/www/html/conf/nginx/nginx-site-ssl.conf ]; then
-  cp /var/www/html/conf/nginx/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
+if [ -f $WEBROOT/conf/nginx/nginx-site-ssl.conf ]; then
+  cp $WEBROOT/conf/nginx/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
 fi
 
 ## Install Node Packages
@@ -71,15 +71,15 @@ if [[ "$HIDE_NGINX_HEADERS" == "0" ]] ; then
 fi
 
 # Always chown webroot for better mounting
-chown -Rf nginx.nginx /var/www/html
+chown -Rf nginx.nginx $WEBROOT
 
 # Run custom scripts
 if [[ "$RUN_SCRIPTS" == "1" ]] ; then
-  if [ -d "/var/www/html/scripts/" ]; then
+  if [ -d "$WEBROOT/scripts/" ]; then
     # make scripts executable incase they aren't
-    chmod -Rf 750 /var/www/html/scripts/*
+    chmod -Rf 750 $WEBROOT/scripts/*
     # run scripts in number order
-    for i in `ls /var/www/html/scripts/`; do /var/www/html/scripts/$i ; done
+    for i in `ls $WEBROOT/scripts/`; do $WEBROOT/scripts/$i ; done
   else
     echo "Can't find script directory"
   fi
